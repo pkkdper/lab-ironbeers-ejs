@@ -18,8 +18,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.render('index');
 });
-app.get('/beers', (req, res) => {
-  res.render('beers');
+app.get('/beers', async (req, res) => {
+  const {allBeers} = await punkAPI
+  .getBeers()
+console.log({allBeers});res.render('beers', {allBeers});
 });
 app.get('/random-beer', (req, res) => {
   res.render('random-beer');
